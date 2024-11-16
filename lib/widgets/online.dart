@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:myapp/main.dart';
 import 'package:myapp/source/local/database.dart';
 import 'package:myapp/model/geo_data.dart' as model;
 import 'package:myapp/source/remote/rest_client.dart';
@@ -49,11 +50,11 @@ class Online extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: () {
-                                // Navigator.pushNamed(context, mapRoute,
-                                //     arguments: {
-                                //       "lat": geo.lat,
-                                //       "lon": geo.lon
-                                //     });
+                                Navigator.pushNamed(context, mapRoute,
+                                    arguments: {
+                                      "lat": geo.lat,
+                                      "lon": geo.lon
+                                    });
                               },
                               icon: const Icon(Icons.map_outlined))
                         ],

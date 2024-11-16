@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialRoute: homeRoute,
       routes: {
         homeRoute: (context) => const MyHomePage(),
-        //mapRoute: (context) => MapLocation()
+        mapRoute: (context) => MapLocation()
       },
     );
   }
