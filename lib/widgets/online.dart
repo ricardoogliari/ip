@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:myapp/controllers/db_controller.dart';
 import 'package:myapp/controllers/rest_controller.dart';
 import 'package:myapp/main.dart';
-import 'package:myapp/source/local/database.dart';
-import 'package:myapp/model/geo_data.dart' as model;
 
 class Online extends GetView<RestController> {
   Online({super.key});
