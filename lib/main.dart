@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapp/bindings/main_binding.dart';
 import 'package:myapp/map_location.dart';
 import 'package:myapp/widgets/conn_state.dart';
 import 'package:myapp/widgets/offline.dart';
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -25,10 +27,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: homeRoute,
-      routes: {
-        homeRoute: (context) => const MyHomePage(),
-        mapRoute: (context) => MapLocation()
-      },
+      getPages: [
+        GetPage(
+          name: homeRoute,
+          page: () => const MyHomePage(),
+          binding: MainBindings()),
+        GetPage(
+          name: mapRoute, 
+          page: () => MapLocation())
+      ],
     );
   }
 }
@@ -69,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _getCurrentWidget() => switch (_connectivityStatus) {
         ConnectivityStatus.checking => const CircularProgressIndicator(),
-        ConnectivityStatus.offline => const Offline(),
+        ConnectivityStatus.offline => Offline(),
         ConnectivityStatus.online => Online(),
       };
 }
