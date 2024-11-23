@@ -8,7 +8,6 @@ const homeRoute = "/home";
 const mapRoute = "/map";
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

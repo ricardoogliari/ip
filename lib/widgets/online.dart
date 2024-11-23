@@ -10,12 +10,11 @@ class Online extends StatelessWidget {
 
   final TextEditingController _ipController = TextEditingController();
 
+  final client = RestClient(Dio());
+  final database = AppDatabase();
+
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
-    final client = RestClient(dio);
-
-    final database = AppDatabase();
 
     return Padding(
         padding: const EdgeInsets.all(16),
@@ -30,8 +29,7 @@ class Online extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () async {
-                  model.GeoData geo =
-                      await client.getGeoData(_ipController.text);
+                  model.GeoData geo = await client.getGeoData(_ipController.text);
                   showBottomSheet(
                     enableDrag: true,
                     showDragHandle: true,
@@ -62,19 +60,21 @@ class Online extends StatelessWidget {
                     },
                   );
 
-                  database
-                      .into(database.geoData)
-                      .insert(GeoDataCompanion.insert(
-                        ip: geo.query ?? "",
-                        city: geo.city ?? "",
-                        regionName: geo.regionName ?? "",
-                        country: geo.country ?? "",
-                        lat: "${geo.lat}",
-                        lon: "${geo.lon}",
-                      ));
+                  _save(data: geo);
                 },
                 child: const Text("Find"))
           ],
+        ));
+  }
+
+  void _save({required model.GeoData data}) {
+    database.into(database.geoData).insert(GeoDataCompanion.insert(
+          ip: data.query ?? "",
+          city: data.city ?? "",
+          regionName: data.regionName ?? "",
+          country: data.country ?? "",
+          lat: "${data.lat}",
+          lon: "${data.lon}",
         ));
   }
 }

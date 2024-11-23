@@ -8,9 +8,9 @@ enum ConnectivityStatus {
 }
 
 class ConnStatus extends StatefulWidget {
-  ConnStatus({super.key, this.callback});
+  const ConnStatus({super.key, this.callback});
 
-  Function(ConnectivityStatus status)? callback;
+  final Function(ConnectivityStatus status)? callback;
 
   @override
   State<ConnStatus> createState() => _ConnStatusState();
